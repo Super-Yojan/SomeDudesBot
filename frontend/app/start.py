@@ -6,7 +6,9 @@ import datetime as dt
 import asyncio
 import os
 
-bot = commands.Bot(command_prefix='&')
+intents = discord.Intents.default()
+intents.members = True
+bot = commands.Bot(command_prefix='/', intents=intents)
 
 
 @bot.command()
@@ -79,6 +81,19 @@ async def remind_homework(ctx):
             except:
                 print("error")
 
+@bot.command()
+async def remove_all_roles(ctx):
+    database = Database()
+    serverlist = ["Programmer's Paradise"]
+    for guild in bot.guilds:
+        if str(guild) in serverlist:
+            for member in guild.members:
+                if (member.bot == False):
+                    for role in member.roles:
+                        try:
+                            await member.remove_roles(role, reason = "Clearing roles", atomic = True)
+                        except:
+                            print("Role:", role, "not removed for", str(member) + ".")
 
 token = os.environ['DISCORD_TOKEN']
 bot.run(token)
