@@ -53,6 +53,7 @@ func GetChallenges() ([]Challenge, error){
 }
 
 func AddChallenge(chal *Challenge) error{
+    fmt.Printf("%v, %v, %v", chal.Author, chal.Title, chal.Description)
     _, err := db.Exec("INSERT INTO challenges ( author, title, description) VALUES ($1, $2, $3)", chal.Author, chal.Title, chal.Description)
     return err
 }
