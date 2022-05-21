@@ -1,20 +1,18 @@
 package controllers
 
-
 import (
-    "somedude/data_access"
-    "github.com/gofiber/fiber/v2"
-    "log"
+	"log"
+	"somedude/data_access"
+	"github.com/gofiber/fiber/v2"
+    "somedude/model"
 )
 
+type Challenge = model.Challenge
 
-type Challenge struct{
-    ID          int64   `JSON:"id"`
-    Author      string  `JSON:"author"`
-    Title       string  `JSON:"title"`
-    Description string  `JSON:"desc"`
+type Respone struct{
+    Success     bool
+    Message     string
 }
-
 
 func Helloworld(c *fiber.Ctx) error {
     return c.SendString("Hello");
@@ -29,3 +27,26 @@ func ChallengesGet(c *fiber.Ctx) error{
     }
     return c.JSON(challenge)
 }
+
+func ChallengesPost(c *fiber.Ctx) error{
+    newChallenge := Challenge{}
+    if err := c.BodyParser(&newChallenge); err != nil{
+        log.Printf("Error parsing body %d", err);
+    }
+
+    err := data_access.AddChallenge(&newChallenge)
+    if err != nil{
+        return c.JSON(fiber.Map{
+            "Success": false,
+            "Message": "Failed to add challenge",
+        })
+
+    }
+    rsp := Respone{
+        Success: true,
+        Message: "Adding Completed",
+    }
+
+    return c.JSON(rsp)
+}
+
