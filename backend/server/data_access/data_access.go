@@ -5,16 +5,12 @@ import(
     _ "github.com/lib/pq"
     "fmt"
     "log"
+    "somedude/model"
 )
 
 var db *sql.DB
 
-type Challenge struct{
-    ID          int64   `JSON:"id"`
-    Author      string  `JSON:"author"`
-    Title       string  `JSON:"title"`
-    Description string  `JSON:"desc"`
-}
+type Challenge = model.Challenge
 
 
 func Migrate(){
@@ -33,9 +29,9 @@ func Migrate(){
 
     fmt.Printf("Database Connected")
 
-    _, err = db.Query("create table challenges (id INT PRIMARY KEY NOT NULL, author CHAR(50), title CHAR(50), description TEXT)")
+    _, err = db.Query("create table challenges (id SERIAL PRIMARY KEY NOT NULL, author CHAR(50), title CHAR(50), description TEXT)")
     if err != nil {
-        log.Fatalf("Error Creating Table challenges %d", err)
+        log.Printf("Error Creating Table challenges %d", err)
     }
 
 }
@@ -56,4 +52,8 @@ func GetChallenges() ([]Challenge, error){
     return challenges, nil
 }
 
+func AddChallenge(chal *Challenge) error{
+    _, err := db.Exec("INSERT INTO challenges ( author, title, description) VALUES ($1, $2, $3)", chal.Author, chal.Title, chal.Description)
+    return err
+}
 

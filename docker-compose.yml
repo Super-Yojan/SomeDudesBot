@@ -18,3 +18,10 @@ services:
       - "8080:8080"
     links:
       - "db"
+  bot:
+    build: ./frontend
+    restart: always
+    links:
+      - "backend"
+    environment:
+      DISCORD_TOKEN: ${DISCORD_TOKEN}
