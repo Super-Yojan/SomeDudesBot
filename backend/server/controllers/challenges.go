@@ -33,7 +33,6 @@ func ChallengesPost(c *fiber.Ctx) error{
     if err := c.BodyParser(&newChallenge); err != nil{
         log.Printf("Error parsing body %d", err);
     }
-
     err := data_access.AddChallenge(&newChallenge)
     if err != nil{
         return c.JSON(fiber.Map{
