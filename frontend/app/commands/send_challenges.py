@@ -4,13 +4,13 @@ Author: Laggstar
 
 import discord
 from discord.ext import commands
-from get_challenge import get_chall_from_db
+from get_challenge import *
 
 async def send_chall(ctx, message):
     # print(message)
     if str(message) == "challenge":
         #{ "id" : 1, "author: : "author", "title" : "title", "challenge" : "Some challenge description"}
-        challdict = get_chall_from_db()
+        challdict = await get_chall_from_db()
         # Get Challenge Name
         embed = discord.Embed(title = challdict["title"], color=discord.Color.blue())
         # Get Challenge author and description
