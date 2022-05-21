@@ -29,13 +29,3 @@ func ChallengesGet(c *fiber.Ctx) error{
     }
     return c.JSON(challenge)
 }
-
-func ChallengesPost(c *fiber.Ctx) error{
-    newChallenge := Challenge{}
-    if err := c.BodyParser(&newChallenge); err != nil{
-        log.Printf("Error parsing body %d", err);
-    }
-
-
-    return c.JSON({"status":"success", "sent": true})
-}
