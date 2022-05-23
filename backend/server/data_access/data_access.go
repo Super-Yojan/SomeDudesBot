@@ -11,6 +11,7 @@ import(
 var db *sql.DB
 
 type Challenge = model.Challenge
+type Solve = model.Solve
 
 
 func Migrate(){
@@ -29,9 +30,13 @@ func Migrate(){
 
     fmt.Printf("Database Connected")
 
-    _, err = db.Query("create table challenges (id SERIAL PRIMARY KEY NOT NULL, author CHAR(50), title CHAR(50), description TEXT)")
+    _, err = db.Exec("create table challenges (id SERIAL PRIMARY KEY NOT NULL, author CHAR(50), title CHAR(50), description TEXT)")
     if err != nil {
         log.Printf("Error Creating Table challenges %d", err)
+    }
+    _, err = db.Exec("create table solve (id SERIAL PRIMARY KEY NOT NULL, username TEXT, title TEXT, file TEXT )")
+    if err != nil {
+        log.Printf("Error Creating Table solve\n %d", err)
     }
 
 }
@@ -55,6 +60,12 @@ func GetChallenges() ([]Challenge, error){
 func AddChallenge(chal *Challenge) error{
     fmt.Printf("%v, %v, %v", chal.Author, chal.Title, chal.Description)
     _, err := db.Exec("INSERT INTO challenges ( author, title, description) VALUES ($1, $2, $3)", chal.Author, chal.Title, chal.Description)
+    return err
+}
+
+func AddSolve(solve *Solve) error{
+    fmt.Printf("%v, %v, %v", solve.User, solve.Title, solve.File)
+    _, err := db.Exec("INSERT INTO solve (username,title,file) VALUES ($1, $2, $3)", solve.User, solve.Title, solve.File)
     return err
 }
 

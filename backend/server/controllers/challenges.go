@@ -3,11 +3,13 @@ package controllers
 import (
 	"log"
 	"somedude/data_access"
+	"somedude/model"
+
 	"github.com/gofiber/fiber/v2"
-    "somedude/model"
 )
 
 type Challenge = model.Challenge
+type Solve = model.Solve
 
 type Respone struct{
     Success     bool
@@ -49,3 +51,23 @@ func ChallengesPost(c *fiber.Ctx) error{
     return c.JSON(rsp)
 }
 
+func ChallengeSolve(c *fiber.Ctx) error{
+    newSolve := Solve{}
+    if err := c.BodyParser(&newSolve); err != nil{
+        log.Panicf("Error parsing solve \n %d", err);
+    }
+    log.Printf("%s, %s, %s \n", newSolve.Title, newSolve.User, newSolve.File)
+    err := data_access.AddSolve(&newSolve);
+    if err != nil{
+        log.Printf("Failed to add to database \n %d", err)
+        return c.JSON(fiber.Map{
+            "Success": false,
+            "Message": "Failed to add Solves",
+        })
+    }
+    rsp := Respone{
+        Success: true,
+        Message: "Solves added",
+    }
+    return c.JSON(rsp);
+}
