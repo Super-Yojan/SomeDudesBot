@@ -1,15 +1,6 @@
 '''
 Author: djjagga
 '''
-import discord
-from discord.ext import commands
-
-
-TOKEN = os.environ('DISCORD_TOKEN')
-guild = os.environ('DISCORD_GUILD')
-
-bot = commands.Bot(command_prefix="/")
-
 
 async def add_Role(ctx, role, names): 
     if not role in ctx.guild.roles:
