@@ -4,8 +4,8 @@ import (
 	"log"
 	"somedude/data_access"
 	"somedude/model"
-
 	"github.com/gofiber/fiber/v2"
+    "somedude/util"
 )
 
 type Challenge = model.Challenge
@@ -56,7 +56,7 @@ func ChallengeSolve(c *fiber.Ctx) error{
     if err := c.BodyParser(&newSolve); err != nil{
         log.Panicf("Error parsing solve \n %d", err);
     }
-    log.Printf("%s, %s, %s \n", newSolve.Title, newSolve.User, newSolve.File)
+    output := util.CheckSolve(&newSolve)
     err := data_access.AddSolve(&newSolve);
     if err != nil{
         log.Printf("Failed to add to database \n %d", err)
@@ -67,7 +67,7 @@ func ChallengeSolve(c *fiber.Ctx) error{
     }
     rsp := Respone{
         Success: true,
-        Message: "Solves added",
+        Message: output,
     }
     return c.JSON(rsp);
 }

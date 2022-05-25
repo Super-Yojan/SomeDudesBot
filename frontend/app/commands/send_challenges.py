@@ -18,5 +18,5 @@ async def send_chall(ctx, message):
         # Get Challenge author and description
         embed.add_field(name = challdict["Author"], value = challdict["Description"], inline = False)
         # Footer
-        embed.set_footer(text = "Send you answer answer as a file")
+        embed.set_footer(text = "Send your answer as a file")
         await ctx.message.author.send(embed = embed)
