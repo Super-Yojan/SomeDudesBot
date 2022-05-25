@@ -4,11 +4,12 @@ import asyncio
 import os
 
 
+
 intents = discord.Intents.default()
 intents.members = True
 bot = commands.Bot(command_prefix='/', intents = intents)
 
-from app.commands import remove_roles, add_user_roles, send_challenges
+from app.commands import remove_roles, add_user_roles, send_challenges,solve_challenges
 
 '''
  All the discord bot commands will be imported here and 
@@ -19,11 +20,12 @@ from app.commands import remove_roles, add_user_roles, send_challenges
 async def remove_user_roles(ctx):
     await remove_roles.remove_all_roles(ctx, bot)
 
-@commands.has_permissions(administrator=True) 
-@commands.has_permissions(manage_roles=True)
-@bot.command()
-async def add_roles(ctx):
-    await add_user_roles.add_role(ctx,"Kabir",["Laggstar"])
+@bot.listen()
+async def on_message(message):
+    server = bot.get_guild(930653648705454120)
+    member = server.get_member(message.author.id)
+    await solve_challenges.solve_chall(message,member)
+
 
 @bot.command()
 async def send_challenge(ctx, message):
