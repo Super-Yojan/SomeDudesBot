@@ -4,7 +4,6 @@ import asyncio
 import os
 
 
-
 intents = discord.Intents.default()
 intents.members = True
 bot = commands.Bot(command_prefix='/', intents = intents)
@@ -26,14 +25,12 @@ async def on_message(message):
     member = server.get_member(message.author.id)
     await solve_challenges.solve_chall(message,member)
 
-
 @bot.command()
 async def send_challenge(ctx, message):
     if ctx.author.bot == False:
         await send_challenges.send_chall(ctx, message)
     else:
         await ctx.channel.send("A bot can't ask for a challenge!")
-    
 
 token = os.environ['DISCORD_TOKEN']
 bot.run(token)
