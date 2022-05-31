@@ -42,6 +42,6 @@ async def solve_chall(message,member):
         else:
             await message.channel.send(rsp['Message'])
             await message.channel.send("If you think you solution is correct and still getting error, check your function signature and make sure to type the title of the challenge. If you are still getting error then contact admin.")
-    elif message.channel.id == 978889517517901854:
+    if message.channel.id == 978889517517901854:
         await message.delete(delay=5.0)
 
