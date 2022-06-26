@@ -26,9 +26,10 @@ async def on_message(message):
     await solve_challenges.solve_chall(message,member)
 
 @bot.slash_command(guild_ids=[930653648705454120])
-async def send_chall(ctx, message):
+async def send_chall(ctx):
     if ctx.author.bot == False:
-        await send_challenges.send_chall(ctx, message)
+        await send_challenges.send_chall(ctx)
+        await ctx.respond("sent")
     else:
         await ctx.channel.send("A bot can't ask for a challenge!")
 
