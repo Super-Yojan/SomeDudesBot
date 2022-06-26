@@ -1,4 +1,4 @@
-aiohttp==3.7.4
+aiohttp
 async-timeout==3.0.1
 attrs==21.4.0
 chardet<4.0
@@ -8,4 +8,3 @@ multidict==6.0.2
 typing_extensions==4.0.1
 yarl==1.7.2
 requests
-discord-py-interactions
