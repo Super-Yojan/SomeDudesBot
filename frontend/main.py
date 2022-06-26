@@ -26,7 +26,7 @@ async def on_message(message):
     member = server.get_member(message.author.id)
     await solve_challenges.solve_chall(message,member)
 
-@bot.command()
+# @bot.command()
 @bot.slash_command(guild_ids=[930653648705454120])
 async def send_chall(ctx, message):
     if ctx.author.bot == False:
