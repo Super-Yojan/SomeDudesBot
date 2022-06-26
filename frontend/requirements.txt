@@ -2,9 +2,12 @@ aiohttp
 async-timeout==3.0.1
 attrs==21.4.0
 chardet<4.0
-py-cord[speed]
+py-cord==2.0.0rc1
 idna==3.3
 multidict==6.0.2
 typing_extensions==4.0.1
 yarl==1.7.2
 requests
+libffi-dev
+libnacl-dev
+python3-dev
