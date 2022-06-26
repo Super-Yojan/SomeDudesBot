@@ -6,7 +6,7 @@ import os
 
 intents = discord.Intents.default()
 intents.members = True
-bot = commands.Bot(command_prefix='/', intents = intents)
+bot = commands.Bot(intents = intents)
 
 from app.commands import remove_roles, add_user_roles, send_challenges,solve_challenges
 
