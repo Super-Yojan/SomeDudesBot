@@ -5,26 +5,6 @@ class Node:
 
 
 def sort_linked_list(list: Node):
-    """
-    static <X> NodePair<X> sort(NodePair<X> pairs, Comparator<X> comp) {
-        Node<X> head = pairs.head;
-        while (head != null) {
-            Node<X> max = head;
-            Node<X> secondHead = head;
-            while (secondHead != null) {
-                if (comp.compare(max.data, secondHead.data) > 0) {
-                    max = secondHead;
-                }
-                secondHead = secondHead.next;
-            }
-            X tmp = max.data;
-            max.data = head.data;
-            head.data = tmp;
-            head = head.next;
-        }
-        return pairs;
-    }
-    """
     newHead = list
     while newHead is not None:
         max = newHead
