@@ -13,7 +13,6 @@ async def send_chall(ctx):
     # { "id" : 1, "author: : "author", "title" : "title", "challenge" : "Some challenge description"}
     x = requests.get(url)
     challdict = x.json()[-1]
-    print(challdict)
     # Get Challenge Name
     embed = discord.Embed(title=challdict["Title"], color=discord.Color.blue())
     # Get Challenge author and description

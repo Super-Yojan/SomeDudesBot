@@ -16,7 +16,7 @@ async def solve_chall(message, member):
         data = {
             "User": str(message.author),
             "Title": str(message.content),
-            "File": str(message.attachments[0].url)
+            "File": (message.attachments[0].url) if len(message.attachments) > 0 else None
         }
         if(data['Title'] == ""):
             newUrl = "http://backend:8080"
@@ -24,7 +24,8 @@ async def solve_chall(message, member):
             challdict = x.json()[-1]
             data['Title'] = challdict['Title'].strip()
 
-        print(data)
+        with open("log.txt", 'a') as f:
+            f.write(str(data)+"\n")
         x = requests.post(url, json=data)
         rsp = x.json()
         last = rsp['Message'][-20:]
