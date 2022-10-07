@@ -1,1 +1,3 @@
 {'User': 'drMoscovium#3477', 'Title': 'hello', 'File': None}
+{'User': 'drMoscovium#3477', 'Title': 'hello', 'File': None}
+<Message id=1027974500375068773 channel=<DMChannel id=976972635818819594 recipient=None> type=<MessageType.default: 0> author=<User id=366000076046204938 name='drMoscovium' discriminator='3477' bot=False> flags=<MessageFlags value=0>>

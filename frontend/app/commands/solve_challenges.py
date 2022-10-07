@@ -11,7 +11,8 @@ from .add_user_roles import assign_Role
 
 
 async def solve_chall(message, member):
-    if "Direct Message" in str(message.channel) and message.user != "Programmer's Paradise#0319":
+    print(type(message.author.bot))
+    if "Direct Message" in str(message.channel) and message.author.id != "959605476507660298" and not message.author.bot:
         url = "http://backend:8080/solve"
         data = {
             "User": str(message.author),
@@ -25,7 +26,7 @@ async def solve_chall(message, member):
             data['Title'] = challdict['Title'].strip()
 
         with open("log.txt", 'a') as f:
-            f.write(str(data)+"\n")
+            f.write(str(message)+"\n")
         x = requests.post(url, json=data)
         rsp = x.json()
         last = rsp['Message'][-20:]

@@ -9,7 +9,7 @@ from discord.ext import commands
 
 async def send_chall(ctx):
     # print(message)
-    url = "http://backend:8080"
+    url = "http://192.168.1.166:8080"
     # { "id" : 1, "author: : "author", "title" : "title", "challenge" : "Some challenge description"}
     x = requests.get(url)
     challdict = x.json()[-1]
