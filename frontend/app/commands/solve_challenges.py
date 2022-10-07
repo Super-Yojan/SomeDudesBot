@@ -11,7 +11,7 @@ from .add_user_roles import assign_Role
 
 
 async def solve_chall(message, member):
-    if "Direct Message" in str(message.channel) and message.author != "Programmer's Paradise#0319":
+    if "Direct Message" in str(message.channel) and message.user != "Programmer's Paradise#0319":
         url = "http://backend:8080/solve"
         data = {
             "User": str(message.author),
