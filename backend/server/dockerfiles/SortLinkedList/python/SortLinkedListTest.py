@@ -53,7 +53,7 @@ class TestSortLinkedList(unittest.TestCase):
             head = head.next
         return True
 
-    @timeout(5)
+    @timeout(10)
     def test_1(self):
         head = self.gen_linked_list()
         head = sort_linked_list(head)
