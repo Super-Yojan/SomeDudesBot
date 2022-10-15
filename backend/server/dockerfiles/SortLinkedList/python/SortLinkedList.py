@@ -17,5 +17,5 @@ def sort_linked_list(list: Node):
         tmp = max.val
         max.val = newHead.val
         newHead.val = tmp
-        newHead = newHead.next
+        # newHead = newHead.next
     return list
